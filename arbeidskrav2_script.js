@@ -37,27 +37,24 @@ const students = [
     document.getElementById("studentCount").innerHTML = students.length;
 
 //2.Skriver ut gjennomsnittskarakter som bokstavkarakter
-    let k1 = 5;
-    let k2 = 4;
-    let k3 = 3;
-    let k4 = 2;
-    let k5 = 1;
-    let k6 = 0;
+    let sumKarakter = 0 
+    for (let student of students) {
+        sumKarakter += Number(student.grade)
+    }
 
-    let sum = k1 + k2 + k3 + k4 + k5 + k6
-    let snitt = sum/6 
+    let snittKarakter = sumKarakter / students.length
 
     let bokstav = ""
 
-    if (snitt>= 5.5){
+    if (snittKarakter>= 5.5){
         bokstav = "A"
-    } else if (snitt >= 4.5){
+    } else if (snittKarakter >= 4.5){
         bokstav = "B"
-    } else if (snitt >= 3.5){
+    } else if (snittKarakter >= 3.5){
         bokstav = "C"
-    } else if (snitt >= 2.5){
+    } else if (snittKarakter >= 2.5){
         bokstav = "D"   
-    } else if (snitt >= 1.5){
+    } else if (snittKarakter >= 1.5){
         bokstav = "E"
     }else {
         bokstav = "F"
@@ -68,9 +65,7 @@ const students = [
 
 
 //3.Teller og skriver ut antall av hver karakter til #gradeA, #grade B osv.
-//https://gemini.google.com/app/701f9f45619a2a35?hl=no brukt som veiledning
-
-
+//https://gemini.google.com/app/04dbfd71c77aa956?hl=no hentet noe herfra som veiledning.
 
     let antallA = 0;
     let antallB = 0;
@@ -79,21 +74,21 @@ const students = [
     let antallE = 0;
     let antallF = 0;
 
-    for (let counter = 0; counter < students.length; counter ++){
-        let karakter = students[counter].grade;
-    
+    for (let student of students){
+        let karakter = student.grade
 
-    if (karakter === "6") {
+
+    if (karakter === "5") {
         antallA++;
-        } else if (karakter === "5") {
-        antallB++;
         } else if (karakter === "4") {
-        antallC++;
+        antallB++;
         } else if (karakter === "3") {
-        antallD++;
+        antallC++;
         } else if (karakter === "2") {
-        antallE++;
+        antallD++;
         } else if (karakter === "1") {
+        antallE++;
+        } else if (karakter === "0") {
         antallF++;
         }
     }
@@ -111,18 +106,34 @@ const students = [
 
 
 //4.Beregner og skriver ut gjennomsnittsalder(runder av til to desimaler)
+//https://gemini.google.com/app/13dc9f63403faa19?hl=no Her har jeg brukt Math.round som hjelp
+// Fant ikke ut noen annen måte å gjøre det på.
+
+let sumAlder= 0
+
+for (let student of students) {
+    sumAlder += student.age;
+}
+let snittAlder = sumAlder / students.length;
+let avrundetSnitt = Math.round(snittAlder*100)/100
+
+document.getElementById("averageAge").innerHTML = avrundetSnitt
 
 
 
+//.5 Teller og skriver ut antall studenter som kommer rett fra videregående
+const VGS = students.filter(student => student.age === 19).length;
+document.getElementById("highSchool").innerHTML = VGS;
 
-//.5
-let antallRettFraVGS = 0;
+//.6 Teller og skriver ut antall studenter som har yrkeserfaring.
+let antallMedErfaring = 0
 
-        
+for (let teller = 0; teller < students.length; teller++ ) {
+    if (students [teller].workexperience >= 1) {
+    antallMedErfaring++
+    }
+}
+document.getElementById("workExperience").innerHTML = antallMedErfaring
+    
 
-    for (const student of students)
 
-           if(student.age === 19){
-        
-           }
-           document.getElementById("highSchool").textContent = antallRettFraVGS
